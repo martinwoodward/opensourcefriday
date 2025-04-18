@@ -111,8 +111,8 @@ function createMarkdownFile(video) {
   
   // Create frontmatter
   const frontMatter = `---
-title: "${title.replace(/"/g, '\\"')}"
-description: "${description.split('\n')[0].replace(/"/g, '\\"')}"
+title: "${title.replace(/\\/g, '\\\\').replace(/"/g, '\\"')}"
+description: "${description.split('\n')[0].replace(/\\/g, '\\\\').replace(/"/g, '\\"')}"
 pubDate: ${new Date(publishedAt).toISOString()}
 thumbnailUrl: "${thumbnails.high.url}"
 videoId: "${videoId}"
