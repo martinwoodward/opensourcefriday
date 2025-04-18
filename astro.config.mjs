@@ -5,8 +5,8 @@ import sitemap from '@astrojs/sitemap';
 
 // https://astro.build/config
 export default defineConfig({
-	site: 'https://github.com/pages/opensourcefriday',
-	// Removed base path to run at root
+	site: 'https://martinwoodward.github.io',
+	base: 'opensourcefriday',
 	integrations: [mdx(), sitemap()],
 	output: 'static',
 });
