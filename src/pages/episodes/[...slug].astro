@@ -1,0 +1,27 @@
+---
+// Simple rest parameter route for episodes
+import { getCollection } from 'astro:content';
+import Episode from '../../layouts/Episode.astro';
+
+export const prerender = true;
+
+export async function getStaticPaths() {
+  const allEpisodes = await getCollection('episodes');
+  
+  return allEpisodes.map(entry => {
+    return {
+      params: { slug: entry.data.slug },
+      props: { entry },
+    };
+  });
+}
+
+const { entry } = Astro.props;
+const { Content } = await entry.render();
+---
+
+<Episode {...entry.data}>
+  <Content />
+</Episode>
+
+

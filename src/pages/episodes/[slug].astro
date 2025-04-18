@@ -1,0 +1,20 @@
+---
+import { getCollection } from 'astro:content';
+import Episode from '../../layouts/Episode.astro';
+
+export async function getStaticPaths() {
+  const episodes = await getCollection('episodes');
+  return episodes.map(entry => {
+    const slug = entry.data.slug;
+    return {
+      params: { slug },
+      props: { entry },
+    };
+  });
+}
+
+const { entry } = Astro.props;
+---
+
+<Episode {...entry.data}>
+</Episode>

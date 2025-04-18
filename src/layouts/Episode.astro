@@ -1,0 +1,113 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import BaseHead from '../components/BaseHead.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import FormattedDate from '../components/FormattedDate.astro';
+
+type Props = CollectionEntry<'episodes'>['data'];
+
+const { title, description, pubDate, updatedDate, thumbnailUrl, videoId } = Astro.props;
+---
+
+<html lang="en">
+	<head>
+		<BaseHead title={title} description={description} />
+		<style>
+			.episode {
+				width: 100%;
+				max-width: 100%;
+				margin: 0 auto;
+				padding: 1rem;
+			}
+			.video-container {
+				position: relative;
+				height: 0;
+				overflow: hidden;
+				margin: 0 auto 2rem auto;
+				border-radius: 8px;
+				box-shadow: var(--box-shadow);
+				width: 640px;
+				height: 480px;
+			}
+			.video-container iframe {
+				position: absolute;
+				top: 0;
+				left: 0;
+				width: 640px;
+				height: 480px;
+				border: 0;
+			}
+			.title {
+				margin-bottom: 0.5rem;
+				font-size: 2.5em;
+				color: rgb(var(--black));
+			}
+			.date {
+				margin-bottom: 1rem;
+				color: rgb(var(--gray));
+			}
+			.last-updated-on {
+				font-style: italic;
+			}
+			.episode-content {
+				margin-top: 2rem;
+				color: rgb(var(--gray-dark));
+				line-height: 1.6;
+			}
+			.youtube-link {
+				display: inline-block;
+				margin-top: 2rem;
+				padding: 0.5rem 1rem;
+				background-color: var(--github-red);
+				color: white;
+				text-decoration: none;
+				border-radius: 6px;
+				font-weight: bold;
+				transition: background-color 0.2s ease;
+			}
+			.youtube-link:hover {
+				background-color: #a41e28;
+			}
+		</style>
+	</head>
+
+	<body>
+		<Header />
+		<main>
+			<article class="episode">
+				<div class="video-container">
+					<iframe
+						src={`https://www.youtube.com/embed/${videoId}?autoplay=1`}
+						title={title}
+						allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+						allowfullscreen
+					>
+					</iframe>
+				</div>
+
+				<h1 class="title">{title}</h1>
+				<div class="date">
+					<FormattedDate date={pubDate} />
+					{
+						updatedDate && (
+							<div class="last-updated-on">
+								Last updated on <FormattedDate date={updatedDate} />
+							</div>
+						)
+					}
+				</div>
+
+				<div class="episode-content">
+					{description}
+					<slot />
+				</div>
+				
+				<a href={`https://www.youtube.com/watch?v=${videoId}`} class="youtube-link" target="_blank" rel="noopener noreferrer">
+					Watch on YouTube
+				</a>
+			</article>
+		</main>
+		<Footer />
+	</body>
+</html>

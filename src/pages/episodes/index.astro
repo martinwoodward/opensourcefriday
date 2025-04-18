@@ -1,66 +1,25 @@
 ---
-import BaseHead from '../components/BaseHead.astro';
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
-import { SITE_TITLE, SITE_DESCRIPTION, GITHUB_BRAND_COLOR } from '../consts';
 import { getCollection } from 'astro:content';
-import FormattedDate from '../components/FormattedDate.astro';
+import BaseHead from '../../components/BaseHead.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import FormattedDate from '../../components/FormattedDate.astro';
+import { SITE_TITLE, SITE_DESCRIPTION } from '../../consts';
 
-// Get episodes sorted by publication date (newest first)
 const episodes = (await getCollection('episodes')).sort(
 	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
 );
 ---
 
-<!doctype html>
 <html lang="en">
 	<head>
-		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+		<BaseHead title={`Episodes | ${SITE_TITLE}`} description={SITE_DESCRIPTION} />
 		<style>
-			.hero {
-				padding: 4rem 1rem;
-				display: flex;
-				flex-direction: column;
-				align-items: center;
-				text-align: center;
-				background-color: rgb(var(--gray-light));
-				margin-bottom: 2rem;
-			}
-			.hero h1 {
-				font-size: 3rem;
-				font-weight: 700;
-				margin-bottom: 1rem;
-				color: rgb(var(--black));
-			}
-			.hero-description {
-				max-width: 600px;
-				margin: 0 auto 2rem;
-				color: rgb(var(--gray-dark));
-				font-size: 1.2rem;
-				line-height: 1.6;
-			}
-			.cta-button {
-				background-color: var(--github-blue);
-				color: white;
-				padding: 0.8rem 1.5rem;
-				border-radius: 6px;
-				text-decoration: none;
-				font-weight: bold;
-				transition: background-color 0.2s ease;
-			}
-			.cta-button:hover {
-				background-color: var(--accent-dark);
-			}
-			.episodes-section {
-				max-width: 100%;
-				margin: 0 auto;
-				padding: 0 0 4rem;
-			}
 			.episodes-grid {
 				display: grid;
 				grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
 				gap: 1.5rem;
-				margin-top: 2rem;
+				padding: 0;
 			}
 			@media (min-width: 640px) {
 				.episodes-grid {
@@ -78,21 +37,11 @@ const episodes = (await getCollection('episodes')).sort(
 				.episodes-grid {
 					grid-template-columns: repeat(4, minmax(300px, 1fr));
 				}
-				.episodes-section {
-					max-width: 1400px;
-					padding: 0 2.5rem 4rem;
-				}
 			}
 			@media (min-width: 1600px) {
 				.episodes-grid {
 					grid-template-columns: repeat(5, minmax(300px, 1fr));
 				}
-			}
-			.section-title {
-				font-size: 2rem;
-				margin-bottom: 2rem;
-				text-align: center;
-				color: rgb(var(--black));
 			}
 			.episode-card {
 				position: relative;
@@ -144,9 +93,9 @@ const episodes = (await getCollection('episodes')).sort(
 			}
 			.episode-content {
 				padding: 1.5rem;
-				flex-grow: 1;
 				display: flex;
 				flex-direction: column;
+				flex-grow: 1;
 			}
 			.title {
 				margin: 0;
@@ -172,67 +121,55 @@ const episodes = (await getCollection('episodes')).sort(
 				-webkit-box-orient: vertical;
 				overflow: hidden;
 			}
-			.featured-episode {
+			.featured {
+				grid-column: 1 / -1;
 				display: grid;
 				grid-template-columns: 1fr 1fr;
-				gap: 3rem;
-				align-items: center;
-				margin-bottom: 4rem;
-				padding: 0 1rem;
+				gap: 2rem;
+				background-color: rgb(var(--gray-light));
+				border-radius: 8px;
+				padding: 2rem;
+				margin-bottom: 2rem;
 			}
-			.featured-content h2 {
-				font-size: 2rem;
+			.featured .episode-card {
+				margin: 0;
+			}
+			.featured-header {
+				margin-top: 0;
+				color: var(--github-blue);
+				font-size: 1.5rem;
 				margin-bottom: 1rem;
-				color: var(--github-blue);
 			}
-			.see-all-link {
-				display: block;
-				text-align: center;
-				margin-top: 3rem;
-				color: var(--github-blue);
-				text-decoration: none;
-				font-weight: bold;
+			.section-title {
+				margin-bottom: 2rem;
+				color: rgb(var(--black));
+				font-size: 2rem;
 			}
-			.see-all-link:hover {
-				text-decoration: underline;
+			.main-container {
+				max-width: 100%;
+				margin: 0 auto;
+				padding: 2rem 0;
+			}
+			@media (min-width: 1200px) {
+				.main-container {
+					max-width: 1400px;
+					padding: 2rem 2.5rem;
+				}
 			}
 			@media (max-width: 768px) {
-				.featured-episode {
+				.featured {
 					grid-template-columns: 1fr;
-				}
-				.hero h1 {
-					font-size: 2.5rem;
 				}
 			}
 		</style>
 	</head>
 	<body>
 		<Header />
-		<main>
-			{episodes.length > 0 && (
-				<div class="featured-episode">
-					<div class="featured-content">
-						<h2>Latest Episode</h2>
-						<h3 class="title">{episodes[0].data.title}</h3>
-						<p class="date"><FormattedDate date={episodes[0].data.pubDate} /></p>
-						<p class="description">{episodes[0].data.description}</p>
-						<p></p>
-						<a href={`/episodes/${episodes[0].data.slug}/`} class="cta-button" style="margin-top: 10rem;">Watch Now</a>
-					</div>
-					<a href={`/episodes/${episodes[0].data.slug}/`} class="episode-card">
-						<div class="thumbnail-container">
-							<img class="thumbnail" src={episodes[0].data.thumbnailUrl} alt={episodes[0].data.title} />
-							<div class="play-icon">▶</div>
-						</div>
-					</a>
-				</div>
-			)}
-
-			<section class="episodes-section">
-				<h2 class="section-title">Recent Episodes</h2>
-				
+		<main class="main-container">
+			<section>
+				<h1 class="section-title">Open Source Fridays Episodes</h1>				
 				<div class="episodes-grid">
-					{episodes.slice(1, 9).map((episode) => (
+					{episodes.map((episode) => (
 						<a href={`/episodes/${episode.data.slug}/`} class="episode-card">
 							<div class="thumbnail-container">
 								<img class="thumbnail" src={episode.data.thumbnailUrl} alt={episode.data.title} />
@@ -246,8 +183,6 @@ const episodes = (await getCollection('episodes')).sort(
 						</a>
 					))}
 				</div>
-				
-				<a href="/episodes" class="see-all-link">See all episodes →</a>
 			</section>
 		</main>
 		<Footer />

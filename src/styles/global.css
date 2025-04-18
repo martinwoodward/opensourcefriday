@@ -5,16 +5,25 @@
  */
 
 :root {
-	--accent: #2337ff;
-	--accent-dark: #000d8a;
-	--black: 15, 18, 25;
-	--gray: 96, 115, 159;
-	--gray-light: 229, 233, 240;
-	--gray-dark: 34, 41, 57;
+	/* GitHub brand colors */
+	--accent: #0969da;
+	--accent-dark: #0550ae;
+	--black: 36, 41, 47;          /* #24292f - GitHub gray-900 */
+	--gray: 87, 96, 106;          /* #57606a - GitHub gray-500 */
+	--gray-light: 246, 248, 250;  /* #f6f8fa - GitHub gray-100 */
+	--gray-dark: 48, 54, 61;      /* #30363d - GitHub gray-800 */
 	--gray-gradient: rgba(var(--gray-light), 50%), #fff;
+	/* GitHub specific colors */
+	--github-blue: #0969da;
+	--github-green: #2da44e;
+	--github-yellow: #bf8700;
+	--github-orange: #bc4c00;
+	--github-red: #cf222e;
+	--github-purple: #8250df;
+	--github-pink: #bf3989;
 	--box-shadow:
-		0 2px 6px rgba(var(--gray), 25%), 0 8px 24px rgba(var(--gray), 33%),
-		0 16px 32px rgba(var(--gray), 33%);
+		0 1px 3px rgba(var(--black), 15%), 0 4px 12px rgba(var(--black), 10%),
+		0 8px 24px rgba(var(--black), 10%);
 }
 @font-face {
 	font-family: 'Atkinson';
@@ -44,7 +53,6 @@ body {
 	line-height: 1.7;
 }
 main {
-	width: 720px;
 	max-width: calc(100% - 2em);
 	margin: auto;
 	padding: 3em 1em;
