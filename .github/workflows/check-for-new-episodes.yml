@@ -7,6 +7,10 @@ on:
   # Also allow manual triggering
   workflow_dispatch:
 
+permissions:
+  contents: write
+  pull-requests: write
+
 jobs:
   check-for-new-episodes:
     runs-on: ubuntu-latest
@@ -48,7 +52,7 @@ jobs:
       
       - name: Create Pull Request
         if: steps.git-check.outputs.changes == 'true'
-        uses: peter-evans/create-pull-request@v5
+        uses: peter-evans/create-pull-request@v7
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           commit-message: "Add new Open Source Fridays episodes"
