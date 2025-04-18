@@ -25,22 +25,10 @@
 		0 1px 3px rgba(var(--black), 15%), 0 4px 12px rgba(var(--black), 10%),
 		0 8px 24px rgba(var(--black), 10%);
 }
-@font-face {
-	font-family: 'Atkinson';
-	src: url('/fonts/atkinson-regular.woff') format('woff');
-	font-weight: 400;
-	font-style: normal;
-	font-display: swap;
-}
-@font-face {
-	font-family: 'Atkinson';
-	src: url('/fonts/atkinson-bold.woff') format('woff');
-	font-weight: 700;
-	font-style: normal;
-	font-display: swap;
-}
+/* Import Mona Sans from Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Mona+Sans:wght@400;500;700&display=swap');
 body {
-	font-family: 'Atkinson', sans-serif;
+	font-family: 'Mona Sans', sans-serif;
 	margin: 0;
 	padding: 0;
 	text-align: left;
