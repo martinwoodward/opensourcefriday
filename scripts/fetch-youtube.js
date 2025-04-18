@@ -10,11 +10,31 @@ import path from 'path';
 import { google } from 'googleapis';
 import dotenv from 'dotenv';
 
+// Load environment variables from .env file
+// Try both the root directory and scripts directory paths
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
+
+// Get the directory path for ES modules
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
+// Attempt to load .env from multiple locations
 dotenv.config();
+dotenv.config({ path: 'scripts/.env' });
+dotenv.config({ path: path.join(__dirname, '.env') });
 
 // Constants
 const YOUTUBE_API_KEY = process.env.YOUTUBE_API_KEY;
 const PLAYLIST_ID = 'PL0lo9MOBetEFmtstItnKlhJJVmMghxc0P';
+
+// Debug info
+if (!YOUTUBE_API_KEY) {
+  console.log('Environment variable loading debug info:');
+  console.log('- Current directory:', process.cwd());
+  console.log('- Script directory:', __dirname);
+  console.log('- Attempted .env paths:', ['.env', 'scripts/.env', path.join(__dirname, '.env')]);
+}
 const CONTENT_DIR = path.join(process.cwd(), 'src/content/episodes');
 
 // Make sure the episodes directory exists
