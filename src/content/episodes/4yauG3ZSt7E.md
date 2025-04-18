@@ -1,7 +1,6 @@
 ---
 title: "Open Source Friday with ClassroomIO"
-description: "Come learn how you can build your own online bootcamp or online school in minutes with ClassroomIO with Kedasha and founder/maintainer Rotimi!
-"
+description: "Come learn how you can build your own online bootcamp or online school in minutes with ClassroomIO with Kedasha and founder/maintainer Rotimi!"
 pubDate: 2024-07-06T06:00:37.000Z
 thumbnailUrl: "https://i.ytimg.com/vi/4yauG3ZSt7E/hqdefault.jpg"
 videoId: "4yauG3ZSt7E"
