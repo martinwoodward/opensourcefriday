@@ -4,7 +4,7 @@ import BaseHead from '../../components/BaseHead.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 import FormattedDate from '../../components/FormattedDate.astro';
-import { SITE_TITLE, SITE_DESCRIPTION } from '../../consts';
+import { SITE_TITLE, SITE_DESCRIPTION, SITE_GITHUB_REPO } from '../../consts';
 
 const episodes = (await getCollection('episodes')).sort(
 	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
@@ -167,10 +167,10 @@ const episodes = (await getCollection('episodes')).sort(
 		<Header />
 		<main class="main-container">
 			<section>
-				<h1 class="section-title">Open Source Fridays Episodes</h1>				
+				<h1 class="section-title"><a href={`${SITE_GITHUB_REPO}`}>Open Source Fridays Episodes</a></h1>				
 				<div class="episodes-grid">
 					{episodes.map((episode) => (
-						<a href={`/episodes/${episode.data.slug}/`} class="episode-card">
+						<a href={`./episodes/${episode.data.slug}/`} class="episode-card">
 							<div class="thumbnail-container">
 								<img class="thumbnail" src={episode.data.thumbnailUrl} alt={episode.data.title} />
 								<div class="play-icon">▶</div>
