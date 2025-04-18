@@ -217,9 +217,9 @@ const episodes = (await getCollection('episodes')).sort(
 						<p class="date"><FormattedDate date={episodes[0].data.pubDate} /></p>
 						<p class="description">{episodes[0].data.description}</p>
 						<p></p>
-						<a href={`/episodes/${episodes[0].data.slug}/`} class="cta-button" style="margin-top: 10rem;">Watch Now</a>
+						<a href={`./episodes/${episodes[0].data.slug}/`} class="cta-button" style="margin-top: 10rem;">Watch Now</a>
 					</div>
-					<a href={`/episodes/${episodes[0].data.slug}/`} class="episode-card">
+					<a href={`./episodes/${episodes[0].data.slug}/`} class="episode-card">
 						<div class="thumbnail-container">
 							<img class="thumbnail" src={episodes[0].data.thumbnailUrl} alt={episodes[0].data.title} />
 							<div class="play-icon">▶</div>
@@ -233,7 +233,7 @@ const episodes = (await getCollection('episodes')).sort(
 				
 				<div class="episodes-grid">
 					{episodes.slice(1, 9).map((episode) => (
-						<a href={`/episodes/${episode.data.slug}/`} class="episode-card">
+						<a href={`./episodes/${episode.data.slug}/`} class="episode-card">
 							<div class="thumbnail-container">
 								<img class="thumbnail" src={episode.data.thumbnailUrl} alt={episode.data.title} />
 								<div class="play-icon">▶</div>
@@ -247,7 +247,7 @@ const episodes = (await getCollection('episodes')).sort(
 					))}
 				</div>
 				
-				<a href="/episodes" class="see-all-link">See all episodes →</a>
+				<a href="./episodes" class="see-all-link">See all episodes →</a>
 			</section>
 		</main>
 		<Footer />
